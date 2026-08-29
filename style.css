@@ -106,23 +106,37 @@ select:focus {
   color: #374151;
 }
 
-.records__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 200px;
+.records__table-wrapper {
+  max-height: 220px;
   overflow-y: auto;
-}
-
-.records__item {
-  padding: 10px 12px;
-  font-size: 0.85rem;
-  background-color: #f9fafb;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
+}
+
+.records__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.records__table th,
+.records__table td {
+  padding: 8px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.records__table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.records__table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid #f0f1f3;
 }
 
 @media (max-width: 480px) {

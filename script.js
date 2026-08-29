@@ -1,13 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form');
   const recordsSection = document.getElementById('records');
-  const recordsList = document.getElementById('records-list');
+  const recordsBody = document.getElementById('records-body');
   const recordsCount = document.getElementById('records-count');
 
+  const STORAGE_KEY = 'vehiculo-registros';
   const TIPO_LABELS = { carro: 'Carro', moto: 'Moto', otro: 'Otro' };
   const PLACA_PATTERN = /^[A-Z0-9-]+$/;
 
-  const records = [];
+  function loadRecords() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveRecords(records) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  }
+
+  const records = loadRecords();
 
   function getFormValues(form) {
     return {
@@ -43,21 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderRecord(record) {
-    const item = document.createElement('li');
-    item.className = 'records__item';
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${record.placa}</td>
+      <td>${TIPO_LABELS[record.tipo] || record.tipo}</td>
+      <td>${record.conductor}</td>
+      <td>${record.hora}</td>
+      <td>${record.espacio || '—'}</td>
+    `;
+    recordsBody.prepend(row);
+  }
 
-    const detalle = [
-      record.placa,
-      TIPO_LABELS[record.tipo] || record.tipo,
-      record.conductor,
-      record.hora,
-    ];
-    if (record.espacio) {
-      detalle.push(`Espacio ${record.espacio}`);
-    }
-
-    item.textContent = detalle.join(' · ');
-    recordsList.prepend(item);
+  function renderAllRecords() {
+    recordsBody.innerHTML = '';
+    records.forEach(renderRecord);
   }
 
   function updateRecordsCount() {
@@ -83,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const record = createRecord(data);
     records.push(record);
+    saveRecords(records);
     renderRecord(record);
     updateRecordsCount();
 
@@ -90,5 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     form.placa.focus();
   }
 
+  renderAllRecords();
+  updateRecordsCount();
   form.addEventListener('submit', handleSubmit);
 });
