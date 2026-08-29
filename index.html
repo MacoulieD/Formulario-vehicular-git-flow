@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Ingreso de Vehículo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Registro de Ingreso de Vehículo</h1>
+    <p class="subtitle">Complete los datos para registrar el ingreso al parqueadero</p>
+
+    <form class="form" action="#" method="post">
+      <div class="field">
+        <label for="placa">Placa del vehículo</label>
+        <input type="text" id="placa" name="placa" placeholder="ABC-123" required pattern="[A-Za-z0-9-]+">
+      </div>
+
+      <div class="field">
+        <label for="tipo">Tipo de vehículo</label>
+        <select id="tipo" name="tipo" required>
+          <option value="" disabled selected>Seleccione una opción</option>
+          <option value="carro">Carro</option>
+          <option value="moto">Moto</option>
+          <option value="otro">Otro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="conductor">Nombre del conductor</label>
+        <input type="text" id="conductor" name="conductor" placeholder="Nombre completo" required>
+      </div>
+
+      <div class="field">
+        <label for="hora">Hora de ingreso</label>
+        <input type="time" id="hora" name="hora" required>
+      </div>
+
+      <div class="field">
+        <label for="espacio">Número de espacio asignado</label>
+        <input type="text" id="espacio" name="espacio" placeholder="Ej. A-12">
+      </div>
+
+      <button type="submit" class="btn">Registrar ingreso</button>
+    </form>
+  </main>
+</body>
+</html>
