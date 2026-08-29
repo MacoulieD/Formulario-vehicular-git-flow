@@ -9,12 +9,13 @@
 <body>
   <main class="card">
     <h1>Registro de Ingreso de Vehículo</h1>
+    <hr>
     <p class="subtitle">Complete los datos para registrar el ingreso al parqueadero</p>
 
     <form class="form" action="#" method="post">
       <div class="field">
         <label for="placa">Placa del vehículo</label>
-        <input type="text" id="placa" name="placa" placeholder="ABC-123" required pattern="[A-Za-z0-9-]+">
+        <input type="text" id="placa" name="placa" placeholder="ABC-123" required pattern="[A-Za-z0-9\-]+">
       </div>
 
       <div class="field">
@@ -44,6 +45,26 @@
 
       <button type="submit" class="btn">Registrar ingreso</button>
     </form>
+
+    <section class="records" id="records" hidden>
+      <h2>Vehículos registrados <span id="records-count">(0)</span></h2>
+      <div class="records__table-wrapper">
+        <table class="records__table">
+          <thead>
+            <tr>
+              <th>Placa</th>
+              <th>Tipo</th>
+              <th>Conductor</th>
+              <th>Hora</th>
+              <th>Espacio</th>
+            </tr>
+          </thead>
+          <tbody id="records-body"></tbody>
+        </table>
+      </div>
+    </section>
   </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
