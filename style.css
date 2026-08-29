@@ -94,6 +94,51 @@ select:focus {
   background-color: #1e40af;
 }
 
+.records {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.records h2 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  color: #374151;
+}
+
+.records__table-wrapper {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.records__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.records__table th,
+.records__table td {
+  padding: 8px 10px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.records__table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f9fafb;
+  color: #374151;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.records__table tbody tr:not(:last-child) td {
+  border-bottom: 1px solid #f0f1f3;
+}
+
 @media (max-width: 480px) {
   .card {
     padding: 24px 20px;
