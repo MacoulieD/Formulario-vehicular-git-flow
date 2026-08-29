@@ -1,27 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form');
-  const recordsSection = document.getElementById('records');
-  const recordsBody = document.getElementById('records-body');
-  const recordsCount = document.getElementById('records-count');
+  const statusMessage = document.getElementById('status-message');
 
-  const STORAGE_KEY = 'vehiculo-registros';
-  const TIPO_LABELS = { carro: 'Carro', moto: 'Moto', otro: 'Otro' };
   const PLACA_PATTERN = /^[A-Z0-9-]+$/;
 
-  function loadRecords() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (error) {
-      return [];
-    }
-  }
-
-  function saveRecords(records) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
-  }
-
-  const records = loadRecords();
+  const records = loadVehiculoRecords();
 
   function getFormValues(form) {
     return {
@@ -56,26 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return { id: Date.now(), ...data };
   }
 
-  function renderRecord(record) {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${record.placa}</td>
-      <td>${TIPO_LABELS[record.tipo] || record.tipo}</td>
-      <td>${record.conductor}</td>
-      <td>${record.hora}</td>
-      <td>${record.espacio || '—'}</td>
-    `;
-    recordsBody.prepend(row);
-  }
-
-  function renderAllRecords() {
-    recordsBody.innerHTML = '';
-    records.forEach(renderRecord);
-  }
-
-  function updateRecordsCount() {
-    recordsCount.textContent = `(${records.length})`;
-    recordsSection.hidden = records.length === 0;
+  function showStatusMessage(text) {
+    if (!statusMessage) return;
+    statusMessage.textContent = text;
+    statusMessage.hidden = false;
   }
 
   function handleSubmit(event) {
@@ -96,15 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const record = createRecord(data);
     records.push(record);
-    saveRecords(records);
-    renderRecord(record);
-    updateRecordsCount();
+    saveVehiculoRecords(records);
 
+    showStatusMessage(`Vehículo ${record.placa} registrado correctamente.`);
     form.reset();
     form.placa.focus();
   }
 
-  renderAllRecords();
-  updateRecordsCount();
   form.addEventListener('submit', handleSubmit);
 });

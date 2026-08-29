@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehículos Registrados</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Vehículos Registrados</h1>
+    <p class="subtitle">Historial de ingresos guardados en este dispositivo</p>
+
+    <section class="records" id="records" hidden>
+      <h2>Vehículos registrados <span id="records-count">(0)</span></h2>
+      <div class="records__table-wrapper">
+        <table class="records__table">
+          <thead>
+            <tr>
+              <th>Placa</th>
+              <th>Tipo</th>
+              <th>Conductor</th>
+              <th>Hora</th>
+              <th>Espacio</th>
+            </tr>
+          </thead>
+          <tbody id="records-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="empty-message" id="empty-message">Aún no hay vehículos registrados.</p>
+
+    <a class="records-link" href="index.html">Volver al formulario</a>
+  </main>
+
+  <script src="storage.js" defer></script>
+  <script src="almacenamiento.js" defer></script>
+</body>
+</html>

@@ -139,6 +139,38 @@ select:focus {
   border-bottom: 1px solid #f0f1f3;
 }
 
+.status-message {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  font-size: 0.85rem;
+  text-align: center;
+  color: #166534;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+}
+
+.empty-message {
+  margin: 0 0 16px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.records-link {
+  display: block;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-align: center;
+  text-decoration: none;
+}
+
+.records-link:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 480px) {
   .card {
     padding: 24px 20px;

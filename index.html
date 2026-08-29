@@ -46,25 +46,12 @@
       <button type="submit" class="btn">Registrar ingreso</button>
     </form>
 
-    <section class="records" id="records" hidden>
-      <h2>Vehículos registrados <span id="records-count">(0)</span></h2>
-      <div class="records__table-wrapper">
-        <table class="records__table">
-          <thead>
-            <tr>
-              <th>Placa</th>
-              <th>Tipo</th>
-              <th>Conductor</th>
-              <th>Hora</th>
-              <th>Espacio</th>
-            </tr>
-          </thead>
-          <tbody id="records-body"></tbody>
-        </table>
-      </div>
-    </section>
+    <p class="status-message" id="status-message" hidden></p>
+
+    <a class="records-link" href="almacenamiento.html">Ver vehículos registrados</a>
   </main>
 
+  <script src="storage.js" defer></script>
   <script src="script.js" defer></script>
 </body>
 </html>
