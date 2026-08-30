@@ -1,7 +1,9 @@
+/* Reset básico: el padding/border no suman al ancho declarado */
 * {
   box-sizing: border-box;
 }
 
+/* Centra la tarjeta del formulario en toda la pantalla */
 body {
   margin: 0;
   min-height: 100vh;
@@ -14,6 +16,7 @@ body {
   color: #1f2937;
 }
 
+/* Tarjeta blanca que contiene el formulario o la tabla, usada en ambas páginas */
 .card {
   width: 100%;
   max-width: 420px;
@@ -36,12 +39,14 @@ h1 {
   text-align: center;
 }
 
+/* Apila los campos del formulario verticalmente */
 .form {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
+/* Agrupa cada label + input como una unidad */
 .field {
   display: flex;
   flex-direction: column;
@@ -73,6 +78,7 @@ select:focus {
   background-color: #ffffff;
 }
 
+/* Botón principal de envío, con estados hover/active para feedback visual */
 .btn {
   margin-top: 8px;
   padding: 12px;
@@ -94,6 +100,7 @@ select:focus {
   background-color: #1e40af;
 }
 
+/* Contenedor del listado de vehículos (index.html y almacenamiento.html) */
 .records {
   margin-top: 28px;
   padding-top: 20px;
@@ -106,6 +113,7 @@ select:focus {
   color: #374151;
 }
 
+/* Scroll interno cuando hay muchos registros, sin agrandar la tarjeta */
 .records__table-wrapper {
   max-height: 220px;
   overflow-y: auto;
@@ -126,6 +134,7 @@ select:focus {
   white-space: nowrap;
 }
 
+/* Encabezado fijo mientras se hace scroll dentro de la tabla */
 .records__table thead th {
   position: sticky;
   top: 0;
@@ -139,6 +148,7 @@ select:focus {
   border-bottom: 1px solid #f0f1f3;
 }
 
+/* Aviso de "registro guardado", mostrado por script.js tras el submit */
 .status-message {
   margin: 16px 0 0;
   padding: 10px 12px;
@@ -150,6 +160,7 @@ select:focus {
   border-radius: 8px;
 }
 
+/* Texto que reemplaza a la tabla cuando aún no hay registros guardados */
 .empty-message {
   margin: 0 0 16px;
   font-size: 0.85rem;
@@ -157,6 +168,7 @@ select:focus {
   text-align: center;
 }
 
+/* Enlace de navegación entre el formulario y el listado de registros */
 .records-link {
   display: block;
   margin-top: 20px;
@@ -171,6 +183,7 @@ select:focus {
   text-decoration: underline;
 }
 
+/* Reduce el padding de la tarjeta en pantallas angostas */
 @media (max-width: 480px) {
   .card {
     padding: 24px 20px;
