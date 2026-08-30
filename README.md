@@ -1,55 +1,51 @@
-# Formulario Vehículo — Git Flow
+Formulario de Vehículos — Git Flow
 
-Aplicación web simple para registrar el ingreso de vehículos a un parqueadero, usada como ejercicio práctico de **Git Flow** (features, develop, release, hotfix).
+Aplicación web sencilla para gestionar el registro de ingreso de vehículos a un parqueadero, desarrollada como ejercicio práctico para aplicar el modelo de trabajo Git Flow, incluyendo el uso de ramas feature, develop, release y hotfix.
 
-## Funcionalidades
+Funcionalidades
+Registro de ingreso (index.html): formulario destinado al registro de vehículos mediante los campos de placa, tipo de vehículo, conductor, hora de ingreso y espacio asignado. Los datos son validados mediante las validaciones nativas de HTML y JavaScript antes de ser almacenados.
+Persistencia de datos: cada registro es almacenado en localStorage del navegador, permitiendo conservar la información incluso después de recargar la página.
+Visualización de registros (almacenamiento.html): presenta una tabla con todos los vehículos registrados, organizados desde el registro más reciente hasta el más antiguo. La información es obtenida del mismo almacenamiento utilizado por el formulario.
+Estructura de archivos
+Archivo Responsabilidad
+index.html Interfaz correspondiente al formulario de registro de vehículos
+almacenamiento.html Interfaz encargada de mostrar los vehículos registrados
+style.css Hoja de estilos compartida entre ambas páginas
+storage.js Gestiona el modelo de almacenamiento: clave de localStorage, loadVehiculoRecords() y saveVehiculoRecords(). Constituye la única fuente de información utilizada por script.js y almacenamiento.js
+script.js Contiene la lógica del formulario, incluyendo validación, creación y almacenamiento de los registros
+almacenamiento.js Administra la consulta de los registros y la construcción dinámica de la tabla
+Ejecución
 
-- **Registro de ingreso** (`index.html`): formulario con placa, tipo de vehículo, conductor, hora de ingreso y espacio asignado. Valida los campos (nativo + JS) antes de guardar.
-- **Persistencia**: cada registro se guarda en `localStorage` del navegador, por lo que sobrevive a recargas de página.
-- **Listado de registrados** (`almacenamiento.html`): tabla con todos los vehículos guardados, más reciente primero, leída del mismo storage que usa el formulario.
+El proyecto no requiere procesos de compilación ni dependencias externas. Los archivos pueden ejecutarse como contenido estático utilizando un servidor local. Por ejemplo:
 
-## Estructura de archivos
-
-| Archivo | Responsabilidad |
-|---|---|
-| `index.html` | Formulario de registro |
-| `almacenamiento.html` | Listado/tabla de vehículos registrados |
-| `style.css` | Estilos compartidos por ambas páginas |
-| `storage.js` | Modelo de datos: clave de `localStorage`, `loadVehiculoRecords()`, `saveVehiculoRecords()` — única fuente de verdad, usada por `script.js` y `almacenamiento.js` |
-| `script.js` | Lógica del formulario: validación, creación del registro, guardado |
-| `almacenamiento.js` | Lógica del listado: lee los registros y arma la tabla |
-
-## Cómo ejecutar
-
-No requiere build ni dependencias. Basta con servir los archivos estáticos, por ejemplo:
-
-```bash
 python -m http.server 8000
-```
 
-y abrir `http://localhost:8000/index.html` en el navegador.
+Posteriormente, se puede acceder a la aplicación desde:
 
-## Flujo de trabajo (Git Flow)
+http://localhost:8000/index.html
 
-El repositorio sigue el modelo de ramas de Git Flow:
+Flujo de trabajo — Git Flow
 
-- **`main`** — código en producción, siempre estable. Cada release/hotfix termina acá con una tag de versión.
-- **`develop`** — rama de integración de las features en curso.
-- **`feature/*`** — una rama por funcionalidad, creada desde `develop` y mergeada de vuelta a `develop` al terminar (ej. `feature/logicaformulario`, `feature/almacenamiento`).
-- **`release/*`** — estabiliza una versión antes de pasarla a `main`.
-- **`hotfix/*`** — corrige algo urgente directamente sobre `main`, sin esperar el próximo release.
+El proyecto implementa el modelo de ramificación Git Flow, utilizando diferentes tipos de ramas según el propósito de cada cambio:
 
-### Ejemplo: hotfix `1.0.1`
+main — contiene la versión estable y lista para producción. Cada versión liberada o corrección urgente finaliza en esta rama acompañada de una etiqueta de versión.
+develop — funciona como rama principal de integración, donde se incorporan las funcionalidades desarrolladas antes de formar parte de una versión estable.
+feature/_ — corresponde a ramas independientes destinadas al desarrollo de funcionalidades específicas. Se crean a partir de develop y, una vez finalizadas, se integran nuevamente en ella. Algunos ejemplos son feature/logicaformulario y feature/almacenamiento.
+release/_ — se utilizan para preparar, verificar y estabilizar una nueva versión antes de integrarla en main.
+hotfix/\* — permiten solucionar errores o realizar correcciones urgentes directamente sobre la versión estable ubicada en main, sin tener que esperar al siguiente ciclo de lanzamiento.
+Ejemplo: Hotfix 1.0.1
 
-La reorganización del modelo de negocio (separar `storage.js` del resto y crear `almacenamiento.html`) se aplicó como hotfix sobre la versión `1.0.0`, siguiendo el cierre estándar de Git Flow:
+La reorganización de la estructura del modelo de datos, incluyendo la separación de storage.js y la incorporación de almacenamiento.html, se implementó como una corrección sobre la versión 1.0.0.
 
-1. Se creó la rama `hotfix/1.0.1` con el fix.
-2. Merge de `hotfix/1.0.1` → `main`.
-3. Se etiquetó `main` con la tag `v1.0.1`.
-4. Merge de `hotfix/1.0.1` → `develop`, para que la próxima release también incluya la corrección.
-5. Se eliminó la rama `hotfix/1.0.1` (ya cumplió su propósito) y se publicaron los cambios (`main`, `develop` y la tag) a `origin`.
+Para completar correctamente el proceso mediante Git Flow se realizó el siguiente procedimiento:
 
-```bash
+Se creó la rama hotfix/1.0.1 a partir de la versión estable.
+Se desarrollaron y confirmaron los cambios correspondientes al hotfix.
+La rama hotfix/1.0.1 se integró en main.
+Se creó la etiqueta v1.0.1 sobre la rama main para identificar la nueva versión.
+Los cambios del hotfix también se integraron en develop, garantizando que la corrección permaneciera disponible para futuras versiones.
+Una vez finalizado el proceso, se eliminó la rama hotfix/1.0.1, debido a que ya había cumplido su función.
+Finalmente, se publicaron en el repositorio remoto las ramas actualizadas y la etiqueta correspondiente.
 git checkout main
 git merge --no-ff hotfix/1.0.1
 git tag -a v1.0.1 -m "Hotfix 1.0.1"
@@ -59,8 +55,6 @@ git merge --no-ff hotfix/1.0.1
 
 git branch -d hotfix/1.0.1
 git push origin main develop v1.0.1
-```
+Tecnologías utilizadas
 
-## Tecnologías
-
-HTML, CSS y JavaScript sin frameworks ni dependencias externas.
+El proyecto fue desarrollado utilizando HTML, CSS y JavaScript, sin implementar frameworks, librerías ni dependencias externas.
