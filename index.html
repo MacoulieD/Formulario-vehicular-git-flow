@@ -12,9 +12,11 @@
     <hr>
     <p class="subtitle">Complete los datos para registrar el ingreso al parqueadero</p>
 
+    <!-- action="#" y method="post" quedan solo como fallback visual: el submit real lo captura script.js -->
     <form class="form" action="#" method="post">
       <div class="field">
         <label for="placa">Placa del vehículo</label>
+        <!-- pattern valida en el navegador; script.js repite la regla en JS por si el pattern nativo falla -->
         <input type="text" id="placa" name="placa" placeholder="ABC-123" required pattern="[A-Za-z0-9\-]+">
       </div>
 
@@ -22,6 +24,7 @@
         <label for="tipo">Tipo de vehículo</label>
         <select id="tipo" name="tipo" required>
           <option value="" disabled selected>Seleccione una opción</option>
+          <!-- Los value coinciden con las claves de VEHICULO_TIPO_LABELS en storage.js -->
           <option value="carro">Carro</option>
           <option value="moto">Moto</option>
           <option value="otro">Otro</option>
@@ -40,17 +43,21 @@
 
       <div class="field">
         <label for="espacio">Número de espacio asignado</label>
+        <!-- Único campo opcional: sin required -->
         <input type="text" id="espacio" name="espacio" placeholder="Ej. A-12">
       </div>
 
       <button type="submit" class="btn">Registrar ingreso</button>
     </form>
 
+    <!-- script.js lo muestra tras un registro exitoso -->
     <p class="status-message" id="status-message" hidden></p>
 
+    <!-- Lleva al listado que lee los mismos datos vía storage.js -->
     <a class="records-link" href="almacenamiento.html">Ver vehículos registrados</a>
   </main>
 
+  <!-- storage.js primero: define las funciones de persistencia que usa script.js -->
   <script src="storage.js" defer></script>
   <script src="script.js" defer></script>
 </body>
